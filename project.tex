@@ -1,0 +1,130 @@
+\documentclass[12pt]{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{cite}
+\usepackage{longtable}
+\usepackage{hyperref}
+
+\title{Fake News Detection using Logistic Regression}
+\author{Tumin Sharma}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+This project explores the use of machine learning algorithms for detecting fake news. The project involves preprocessing text data, applying various models, and evaluating their performance using standard metrics.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction}
+\subsection{Background}
+Fake news has become a significant challenge in today's digital age, with misinformation spreading rapidly across social media and other platforms. Identifying and mitigating fake news is essential to ensuring the reliability of information available to the public.  
+
+\subsection{Motivation}
+With the growing influence of news on public opinion, detecting fake news using machine learning can play a crucial role in combating misinformation. This project aims to contribute to this domain by exploring effective machine learning models for fake news classification.
+
+\subsection{Objectives}
+\begin{itemize}
+    \item To preprocess a dataset containing real and fake news articles.
+    \item To implement machine learning models for classifying news articles as real or fake. 
+    \item To evaluate the performance of the models using appropriate metrics.
+\end{itemize}
+
+\section{Literature Review}
+Summarize existing research related to your topic. Discuss different methodologies previously used to tackle similar problems.
+
+\section{Dataset Description}
+\subsection{Source}
+The data and the inspiration on how to use the data was taken from 
+\href{www.github.com/kapilsinghnegi}{Kapil Singh Negi}
+
+\subsection{Features}
+The dataset includes the following features:  
+\begin{itemize}
+    \item \textbf{Title}: The headline of the news article.  
+    \item \textbf{Text}: The main content of the news article.  
+    \item \textbf{Subject}: The category of the news article (e.g., politics, technology).  
+    \item \textbf{Date}: The publication date of the article.
+\end{itemize}
+
+\subsection{Target Variable}
+The target variable is \textbf{Label}, which indicates whether the news article is:  
+\begin{itemize}
+    \item \textbf{1}: Fake
+    \item \textbf{0}: Real
+\end{itemize}
+
+\section{Data Preprocessing}
+The data was straightforward to use with. Except I needed to vectorized the words into computable matrices. And before I did that there were lot of unnecessary context free data values like \href{https://productresources.collibra.com/docs/collibra/latest/Content/Settings/ServicesConfiguration/co_stop-words.htm}{stop words} and symbols. So using RegEx I got read of those and uncapitalized every word for more continuity.
+\newline
+\newline
+Also intuitively the \textbf{Date} does not have any direct correlation with the news being fake or not. So I got rid of that column totally. A lot can be at least asssumed from a \textbf{Title} alone so I kept it and the \textbf{Text} is our main input feature. Lastly for statistical theory that and particular \textbf{Subject} has more fake news or not I kept that feature too.
+
+\section{Methodology}
+\subsection{Algorithms Used}
+Since there are only 2 simple labels, I used \textbf{Logistic Regression}, the best algorithm for simple binary classification.
+
+\section{Implementation}
+\subsection{Tools and Libraries}
+List the tools and libraries used for implementing the solutions are
+\begin{itemize}
+    \item \textbf{Python}: The primary programming language.
+    \item \textbf{Scikit-learn}: For machine learning models and evaluation metrics.
+    \item \textbf{Pandas}: For data manipulation.
+    \item \textbf{Matplotlib}: For data visualization.
+    \item \textbf{Seaborn}: For data visualization.
+\end{itemize}
+
+\subsection{Parameters}
+The following hyperparameters were tuned for the Logistic Regression model:
+\begin{itemize}
+    \item \textbf{C}: Regularization strength.
+    \item \textbf{penalty}: 'l2' for regularization.
+\end{itemize}
+
+\subsection{Training Process}
+The dataset was split into training (80\%) and testing (20\%) sets. The models were trained using 5-fold cross-validation to ensure robustness.
+
+\section{Results}
+The performance of the tuned Logistic Regression model is summarized below:
+
+\subsection{Classification Report}
+\begin{verbatim}
+               precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      4286
+           1       1.00      1.00      1.00      4652
+
+    accuracy                           1.00      8938
+   macro avg       1.00      1.00      1.00      8938
+weighted avg       1.00      1.00      1.00      8938
+\end{verbatim}
+
+\subsection{Confusion Matrix}
+The confusion matrix for the tuned model is:
+
+\begin{verbatim}
+[[4286    0]
+ [   0 4652]]
+\end{verbatim}
+
+
+\section{Discussion}
+The model achieved an accuracy of 1.00 on the test set, indicating perfect classification. The confusion matrix confirms that there were no false positives or false negatives. This could suggest that the dataset is well-defined and the model is overfitted, as a real-world scenario may not always yield such perfect results.
+
+
+\section{Conclusion}
+In this project, I successfully built and evaluated machine learning models for fake news detection. The Logistic Regression model performed exceptionally well, achieving 100\% accuracy. Future work could involve experimenting with more complex models, like neural networks, and evaluating the model on new datasets.
+
+
+\section{References}
+\begin{itemize}
+    \item \textbf{Data:} \href{https://github.com/kapilsinghnegi/Fake-News-Detection/tree/main/Datasets}{Kapil Signh Negi's Dataset}.
+    \item \textbf{Documentations:} \href{https://matplotlib.org/stable/users/index.html}{Matplotlib}, \href{https://pandas.pydata.org/docs/}{Pandas}, \href{https://scikit-learn.org/dev/api/sklearn.linear_model.html}{Scikitlean}.
+    \item \textbf{Additional guidance:} \href{https://chatgpt.com/}{ChatGPT}, \href{https://www.kaggle.com/learn}{Kaggle Learn}, \href{https://www.youtube.com/@sentdex}{Sentdex}.
+\end{itemize}
+
+
+\end{document}
